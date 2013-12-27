@@ -3,9 +3,10 @@
 
     var TypeaheadMultiple = {
         select: function () {
+            var element = this.$element[0];
             var val = this.$menu.find('.active').attr('data-value');
             var offset = val.length - this.length_of_query;
-            var position = getCaretPosition(this.$element[0]) + offset;
+            var position = getCaretPosition(element) + offset;
 
             if (this.autoSelect || val) {
                 this.$element
@@ -13,7 +14,8 @@
                     .change();
             }
 
-            setCaretPosition(this.$element[0], position);
+            setCaretPosition(element, position);
+            $(element).trigger('input');
             return this.hide();
         },
         updater: function(item) {
